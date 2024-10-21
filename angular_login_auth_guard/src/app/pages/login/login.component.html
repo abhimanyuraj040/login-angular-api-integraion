@@ -11,13 +11,13 @@
 
       <div class="inputBox"> 
 
-       <input type="text" required> <i>Username</i> 
+       <input type="text" name="EmailId" [(ngModel)]="loginObj.EmailId" required> <i>EmailId</i> 
 
       </div> 
 
       <div class="inputBox"> 
 
-       <input type="password" required> <i>Password</i> 
+       <input type="password" name="Password" [(ngModel)]="loginObj.Password" required> <i>Password</i> 
 
       </div> 
 
@@ -27,7 +27,7 @@
 
       <div class="inputBox"> 
 
-       <input type="submit" value="Login"> 
+       <button type="button" value="Login" (click) = "onLogin()"> Login</button>
 
       </div> 
 
