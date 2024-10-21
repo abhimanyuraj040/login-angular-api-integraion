@@ -1,6 +1,7 @@
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component, inject, NgModule } from '@angular/core';
 import {FormsModule} from '@angular/forms'
+import { ApicallService } from '../../apicall.service';
 
 @Component({
   selector: 'app-login',
@@ -12,24 +13,45 @@ import {FormsModule} from '@angular/forms'
 })
 export class LoginComponent {
   loginObj:any = {
-    "EmailId":"",
-    "Password":""
+    "EmailId":"haram",
+    "Password":"haram"
   };
 
-  http = inject(HttpClient);
+  object1:any = {
+    "name": "Apple MacBook Pro 16",
+    "data": {
+       "year": 2019,
+       "price": 1849.99,
+       "CPU model": "Intel Core i9",
+       "Hard disk size": "1 TB"
+    }
+ };
+
+  constructor(private httpClient: HttpClient){}
 
   onLogin(){
-    debugger;
-    console.log("you are inside login function:)");
-    this.http.post("https://freeapi.miniprojectideas.com/api/User/Login", this.loginObj).subscribe((res:any) => {
-      debugger;
+    console.log("Email: ",this.loginObj.Email);
+    console.log("Password: ", this.loginObj.Password);
+    this.httpClient.post("https://freeapi.miniprojectideas.com/api/User/Login",this.loginObj).subscribe((res:any)=>{
+      console.log(res.message);
       if(res.result){
-        alert("Welcome!! You have logged in successfully");
+        alert("Welcome");
       }
       else{
-        alert("Incorrent Credentials. Please try again.");
+        alert("Try Again");
       }
     })
+
+    // this.httpClient.get("https://api.restful-api.dev/objects").subscribe(data => {
+    //   console.log(data);
+    // })
+
+    // this.httpClient.post("https://api.restful-api.dev/objects",this.object1).subscribe((res:any)=>{
+    //   console.log("name: ",res.name);
+    //   console.log("data: ",res.data);
+
+    // })
+    
   }
 
 }
